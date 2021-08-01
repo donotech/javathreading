@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Module 2, Session 1</title>
+	<script src="js/someFunctions.js"></script>
+	<script src="js/mathops.js"></script>
+	<script src="js/stringops.js"></script>
+</head>
+<body>
+	<!-- SESSION 1 -->
+	<h1 id="myname">Manojit</h1>
+	<button onclick="document.getElementById('myname').innerHTML = mult(2,3);">Who am I?</button>
+	<button onclick="document.getElementById('myname').innerHTML = 'Manojit';">Whats my name?</button>
+	<button onclick="alert(mult(3,5))">Click (alert)</button>
+	<button onclick="console.log(mult(3,5))">Click (console)</button>
+	<button onclick="document.write('abcd')">Click (document.write)</button>
+	<hr />
+	<br />
+	<img id="ilove" src="images/gray.png" style="width: 256px;" alt="Image Screen" />
+	<br />
+	<!--
+	<button onclick="deer();">I love Deer</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button onclick="monkey();">I love Monkey</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button onclick="gray();"> X </button>
+	<button onclick="ilove('deer');">I love Deer</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button onclick="ilove('monkey');">I love Monkey</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button onclick="ilove('gray'); alert('gray');"> X </button>
+	-->
+	<script>
+		/*
+		function mult(a,b){
+			return a * b;
+		}
+		*/
+		// console.log(z);
+
+		// var অলীক = 'Aleek';
+		// console.log(অলীক);
+		// cl(document.getElementById('ilove').src.split('/'));
+	</script>
+	<hr />
+	<!-- SESSION 2 -->
+	<button onclick="myAnimal(this.innerHTML);">My Deer Button</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button onclick="myAnimal(this.innerHTML);">My Monkey Button</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button onclick="myAnimal(this.innerHTML);">My Gray Button</button>
+	<hr />
+	<div id="output">Something</div>
+	<br />
+    <!-- SESSION 3 -->
+    <button id="1" onclick="checkAnimal(this.id);">This creature can run and jump</button><br />
+    <button id="2" onclick="checkAnimal(this.id);">This creature can hang from brunches</button><br />
+    <button id="3" onclick="checkAnimal(this.id);">There are no creatures in this image</button>
+    <br /><br />
+    <input type="text" id="season" value="" />&nbsp;&nbsp;<button onclick="howPeopleFeels(document.getElementById('season').value.toLowerCase());">Check</button>
+    <br /><br />
+    <button onclick="clearTimeout(waitAndAdd);">Stop addition</button>
+    <button onclick="clearInterval(oneSecStep);">Stop the clock</button>
+    <br />
+</body>
+</html>
