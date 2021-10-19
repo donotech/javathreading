@@ -34,7 +34,6 @@ search_term_store = []
 @cross_origin()
 # ‘/’ URL is bound with hello_world() function.
 def search2():
-    dbConfig = read_config_entries()
     username = request.args.get('username')
     searchterms = request.args.get('search')
     search_term_store.append(searchterms)
@@ -57,6 +56,17 @@ def list_all_terms():
         print(str)
     str += '</ol><p><a href="/">Click To Go Back</a></p></body></html>'
     return str
+
+
+@app.route('/change_password')
+@cross_origin()
+def change_password():
+    username = request.args.get('username')
+    password = request.args.get('search')
+    sql = "update user_table set password = '" + password + "' where username='" + username + "'"
+    print(sql)
+    # here some code to execute sql on database like dbapi.executSql)
+    return sql
 
 
 # main driver function
