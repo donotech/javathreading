@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main'
+        }
+    }
+
+    test {
+        java {
+            srcDir 'src/test'
+        }
+    }
+}
+
+
+dependencies {
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'com.microsoft.sqlserver:mssql-jdbc:7.4.1.jre8'
+    testImplementation 'junit:junit:4.13'
+    testRuntimeOnly 'junit:junit:4.13'
+}
+
+test {
+    useJUnitPlatform()
+}
