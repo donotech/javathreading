@@ -1,9 +1,10 @@
-package com.bdec.hero.training.java;
+import java.sql.Date;
+import java.util.*;
 
 import java.sql.*;
 
 @SuppressWarnings({"WeakerAccess", "Unused"})
-public class MovieDb {
+public class DependJava {
     static String url = "jdbc:sqlserver://aviziva.cqe9nls0ck5k.ap-south-1.rds.amazonaws.com:1433;database=avz_trainer;loginTimeout=30;";
     static String user = "azadmin";
     static String password = "Generic1234";
@@ -222,19 +223,19 @@ public class MovieDb {
 
     public static void main(String[] args) {
         checkConnection();
-        showAllMovies();
+
 
         /****
-        //uncomment for db functions
+         //uncomment for db functions
 
-        insertMoviePreparedStatement();
-        transaction_demo();
-        showAllMovies();
-        showAllActors();
-        insertMovieRaw();
-        showAllMovies();
-        // end uncomment
-        ****/
+         insertMoviePreparedStatement();
+         transaction_demo();
+         showAllMovies();
+         showAllActors();
+         insertMovieRaw();
+         showAllMovies();
+         // end uncomment
+         ****/
 
     }
 
