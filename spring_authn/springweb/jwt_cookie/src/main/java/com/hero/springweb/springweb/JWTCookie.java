@@ -1,16 +1,18 @@
 package com.hero.springweb.springweb;
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.impl.DefaultJwtBuilder;
-import io.jsonwebtoken.impl.DefaultJwtParser;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.TextCodec;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -32,9 +34,10 @@ public class JWTCookie {
                     .setSigningKey(TextCodec.BASE64.decode("Extreeemly SecretKey"))
                     .parseClaimsJws(token);
             String username = (String) jws.getBody().get("user");
+            String email = (String) jws.getBody().get("email");
             return "This is the page of " +
-                    request.getHeader(HttpHeaders.AUTHORIZATION) + "token" +
-                    token + " user " + username;
+                    //request.getHeader(HttpHeaders.AUTHORIZATION)+
+                    token + " user " + username + " email = " + email;
         }
         return "Invalid requested user";
     }
@@ -48,6 +51,7 @@ public class JWTCookie {
             Date tenMinsFromNow = currentTimeNow.getTime();
             String token  = Jwts.builder()
                     .claim("user", username)
+                    .claim("email", "devraj@bdec.in")
                     .setExpiration(tenMinsFromNow)
                     .signWith(SignatureAlgorithm.HS256,
                             TextCodec.BASE64.decode("Extreeemly SecretKey"))
