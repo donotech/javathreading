@@ -1,4 +1,4 @@
-package com.hero.springweb.spring_security;
+package com.hero.springweb.spring_security.mvc_security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,31 +8,32 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
-//@Configuration
-//@EnableWebSecurity
-public class WebSecurityConfig { //extends WebSecurityConfigurerAdapter {
-    //@Override
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig2 extends WebSecurityConfigurerAdapter {
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/hello", "/home").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
-                .and()
-                .antMatcher("/hello").httpBasic();
+                .permitAll();
     }
 
-//    @Bean
-//    @Override
+    @Bean
+    @Override
     public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withDefaultPasswordEncoder()
@@ -41,7 +42,13 @@ public class WebSecurityConfig { //extends WebSecurityConfigurerAdapter {
                         .roles("USER")
                         .build();
 
-        return new InMemoryUserDetailsManager(user);
-        //return new JdbcUserDetailsManager(user);
+        UserDetails adminUser =
+                User.withDefaultPasswordEncoder()
+                        .username("admin")
+                        .password("admin")
+                        .roles("ADMIN")
+                        .build();
+        return new InMemoryUserDetailsManager(user,adminUser);
     }
+
 }
