@@ -1,4 +1,4 @@
-package com.bdec.hero.spring_web.spring_security_rest;
+package com.bdec.hero.spring_web.spring_security_rest.basic_auth;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
-@RestController
+//@RestController
 public class UserController {
 
     @GetMapping("/home")

@@ -1,4 +1,4 @@
-package com.bdec.hero.spring_web.spring_security_rest;
+package com.bdec.hero.spring_web.spring_security_rest.basic_auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +15,8 @@ import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter
 import static org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter.Directive.*;
 
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
