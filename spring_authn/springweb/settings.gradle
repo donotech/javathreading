@@ -2,4 +2,7 @@ rootProject.name = 'springweb'
 include 'spring_security'
 include 'jwt_cookie'
 include 'spring_data_jpa'
+include 'spring_security_rest'
+include 'spring_security_oauth'
+include 'redis_jpa'
 

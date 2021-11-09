@@ -1,4 +1,4 @@
-package com.hero.springweb.spring_security.mvc_security;
+package com.hero.springweb.spring_security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

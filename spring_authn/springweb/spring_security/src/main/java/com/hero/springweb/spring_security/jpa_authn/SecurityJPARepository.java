@@ -1,8 +1,7 @@
 package com.hero.springweb.spring_security.jpa_authn;
 
-import com.hero.springweb.spring_security.jpa_authn.JPAUserEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface SecurityJPARepository extends JpaRepository<JPAUserEntity, Integer> {
-    public JPAUserEntity findByUserName(String userName);
+public interface SecurityJPARepository extends CrudRepository<JPAUserEntity, Integer> {
+    JPAUserEntity findByUserName(String userName);
 }

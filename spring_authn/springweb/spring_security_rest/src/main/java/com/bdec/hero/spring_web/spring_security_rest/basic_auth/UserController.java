@@ -18,7 +18,9 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String getUser(){
+    public String getUser(HttpServletRequest request, HttpServletResponse response){
+        request.getRemoteUser();
+        response.setHeader("Authorize: Bearer ", "tokenvalue");
         return "hello user";
     }
 
