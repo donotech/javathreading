@@ -11,3 +11,5 @@ include 'eureka_server'
 include 'eureka_client'
 include 'eureka_client_hello'
 include 'cloud_gateway_server'
+include 'spring_async'
+
