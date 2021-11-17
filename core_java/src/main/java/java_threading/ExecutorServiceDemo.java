@@ -4,15 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
+class DemoReturnCallable implements Callable<String> {
+
+    @Override
+    public String call() throws Exception {
+        return "CallableDemoString";
+    }
+}
+
 public class ExecutorServiceDemo {
     public static void simple_executor_service() {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-
         executorService.execute(new Runnable() {
             public void run() {
-                System.out.println("Asynchronous task");
+                System.out.println("Asynchronous task " + Thread.currentThread().getName());
             }
         });
+
+        System.out.println("Main thread: " + Thread.currentThread().getName());
 
         executorService.shutdown();
     }
@@ -27,10 +36,13 @@ public class ExecutorServiceDemo {
         });
 
         try {
-            future.get();
+            //future.get();
+            future.get(100, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
             e.printStackTrace();
         }
 
@@ -97,6 +109,6 @@ public class ExecutorServiceDemo {
         //simple_executor_service();
         //executor_service_with_futures_and_runnable();
         //executor_service_with_futures_and_callable();
-        //executor_service_with_multiple_callable();
+        executor_service_with_multiple_callable();
     }
 }
