@@ -3,6 +3,8 @@ package java_threading;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 class SampleClass {
     public SampleClass() {
@@ -15,6 +17,18 @@ class SampleClass {
 }
 
 public class ClassLoaderDemo {
+
+    public static String out() {
+        String s = new String();
+        String s2 = s;
+        return s;
+    }
+
+    public String something() {
+        String ref = out();
+        return ref;
+    }
+
     public static void main(String[] args) {
         try
         {
@@ -36,15 +50,24 @@ public class ClassLoaderDemo {
             methods[0].invoke(object);
 
         }
-        catch (ClassNotFoundException | NoSuchMethodException e)
+        catch (ClassNotFoundException |
+                NoSuchMethodException |
+                IllegalAccessException |
+                InstantiationException |
+                InvocationTargetException e)
         {
             e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
         }
+
+        List<String> l = new ArrayList<>();
+        for(int i =0; i < 10; i++) {
+            l.add(new String(i + ""));
+        }
+        System.gc();
+        //program stsrt
+        ///......
+//        f1();
+//        f2();
+//        f3();
     }
 }
