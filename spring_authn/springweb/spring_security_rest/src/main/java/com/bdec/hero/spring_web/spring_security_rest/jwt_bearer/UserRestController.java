@@ -1,20 +1,14 @@
 package com.bdec.hero.spring_web.spring_security_rest.jwt_bearer;
-import com.bdec.hero.spring_web.spring_security_rest.pro_like_api.DBUser;
-import com.bdec.hero.spring_web.spring_security_rest.pro_like_api.DBUserRepository;
-import com.sun.security.auth.UserPrincipal;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
+import java.security.Principal;
 
 @RestController
 public class UserRestController {
@@ -45,6 +39,14 @@ public class UserRestController {
                         .getContext()
                         .getAuthentication()
                         .getPrincipal();
+
+        return "hello " + userPrincipal;
+    }
+
+    @GetMapping("/hellosecurity")
+    public String helloUserWithPrincipal(Principal securityPrincipal) {
+        String userPrincipal =
+                securityPrincipal.getName();
 
         return "hello " + userPrincipal;
     }

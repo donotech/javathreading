@@ -1,30 +1,23 @@
 package java_threading;
 
 class MyRunnable implements Runnable {
-    String something;
+    String runnableName;
 
-    public MyRunnable(String something) {
-        this.something = something;
+    public MyRunnable(String runnableName) {
+        this.runnableName = runnableName;
     }
 
-    public void someOtherMethods() {
-        System.out.println("blah");
-        System.out.println("someMethods thread name " + Thread.currentThread().getName());
+    String returnVariable;
+
+    public String getReturnVariable() {
+        return runnableName + ":" + returnVariable;
     }
 
     @Override
     public void run() {
-        System.out.println("This is my runnable thread");
-        System.out.println("This is  " + something);
-        for(int i = 0; i<5; i++) {
-            System.out.println("In " + something + " i = " + i);
-            try {
-                Thread.sleep(1000);
-                someOtherMethods();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        this.returnVariable = "This is returned from " + runnableName + ":thread name:" +
+                Thread.currentThread().getName() + ":" + Thread.currentThread().getId();
+        System.out.println(this.returnVariable);
     }
 }
 
@@ -32,14 +25,30 @@ public class MyThread extends Thread {
 
     @Override
     public void run(){
-        System.out.println("MyThread running " + Thread.currentThread().getName());
+        System.out.println("MyThread running " + Thread.currentThread().getName() + " my id " + getId());
     }
 
     public static void main(String[] args) {
+        //runnable with no thread
+//        MyRunnable r = new MyRunnable("No Thread");
+//        r.run();
+//
+        MyRunnable runnable = new MyRunnable("My Runnable Thread");
+        Thread runnableThread = new Thread(runnable, "Runnable thread");
+        runnableThread.start();
+////
+////        for(int i = 0; i < 3; i++) {
+////            System.out.println("In main thread i = " + i);
+////            try {
+////                Thread.sleep(100);
+////            } catch (InterruptedException e) {
+////                e.printStackTrace();
+////            }
+////        }
         MyThread myThread = new MyThread();
         myThread.start();
         System.out.println("Print im in main thread");
-
+//
         Thread  namedThread = new Thread("My name is khan") {
             public void run(){
                 System.out.println("run by: " + getName());
@@ -47,29 +56,35 @@ public class MyThread extends Thread {
         };
 
         namedThread.start();
-        System.out.println("Current name : " + Thread.currentThread().getName());
+        try {
+            myThread.join(10l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("After myThread");
 
-        MyRunnable runnable = new MyRunnable("My Runnable Thread");
-        runnable.someOtherMethods();
+//        System.out.println("Current name : " + Thread.currentThread().getName());
+//
+//
+//
+//
+//
+//        Thread  infiniteThread = new Thread("My name is infinity") {
+//            public void run(){
+//                for(int i = 0; i<10; i++) {
+//                    try {
+//                        System.out.println("waiting: " + getName() + " i = " + i);
+//                        Thread.sleep(1000L);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                System.out.println("run by: " + getName());
+//            }
+//        };
+//
+//        infiniteThread.start();
+//
 
-        Thread runnableThread = new Thread(runnable, "Runnable thread");
-
-        runnableThread.start();
-
-        Thread  infiniteThread = new Thread("My name is infinity") {
-            public void run(){
-                for(int i = 0; i<10; i++) {
-                    try {
-                        System.out.println("waiting: " + getName() + " i = " + i);
-                        Thread.sleep(1000L);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                System.out.println("run by: " + getName());
-            }
-        };
-
-        infiniteThread.start();
     }
 }
